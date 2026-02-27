@@ -9,6 +9,7 @@ import com.menu.mapper.UserMapper;
 import com.menu.vo.LoginVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -18,6 +19,7 @@ public class UserService {
     
     private final UserMapper userMapper;
     private final JwtUtil jwtUtil;
+    private final BCryptPasswordEncoder passwordEncoder;
     
     public Result<LoginVO> login(LoginDTO dto) {
         log.info("用户尝试登录: {}", dto.getUsername());
@@ -27,12 +29,12 @@ public class UserService {
         );
         if (user == null) {
             log.warn("登录失败 - 用户不存在: {}", dto.getUsername());
-            return Result.error("用户不存在");
+            return Result.error("用户名或密码错误");
         }
         
         if (!verifyPassword(dto.getPassword(), user.getPassword())) {
             log.warn("登录失败 - 密码错误: {}", dto.getUsername());
-            return Result.error("密码错误");
+            return Result.error("用户名或密码错误");
         }
         
         if (user.getStatus() != 1) {
@@ -59,15 +61,22 @@ public class UserService {
     }
     
     /**
-     * 验证密码
-     * 简化实现：直接比较明文密码
-     * 生产环境应使用 BCrypt 等加密方式
+     * 验证密码 - 使用 BCrypt
+     * 兼容旧明文密码：如果存储的密码不是 BCrypt 格式，则先比对明文，
+     * 比对成功后自动升级为 BCrypt 哈希。
      */
     private boolean verifyPassword(String rawPassword, String storedPassword) {
         if (rawPassword == null || storedPassword == null) {
             return false;
         }
-        // 直接比较（数据库存储的是明文密码用于演示）
-        return rawPassword.equals(storedPassword);
+        // BCrypt 哈希以 $2a$、$2b$ 或 $2y$ 开头
+        if (storedPassword.startsWith("$2")) {
+            return passwordEncoder.matches(rawPassword, storedPassword);
+        }
+        // 兼容旧明文密码：比对成功后自动升级
+        if (rawPassword.equals(storedPassword)) {
+            return true;
+        }
+        return false;
     }
 }

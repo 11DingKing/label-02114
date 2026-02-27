@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     
     private final JwtInterceptor jwtInterceptor;
+    private final RoleInterceptor roleInterceptor;
     
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -33,5 +34,8 @@ public class WebConfig implements WebMvcConfigurer {
                     "/v3/api-docs/**",
                     "/api-docs/**"
                 );
+        // RBAC: RoleInterceptor 在 JwtInterceptor 之后执行
+        registry.addInterceptor(roleInterceptor)
+                .addPathPatterns("/api/**");
     }
 }

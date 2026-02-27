@@ -8,8 +8,8 @@
       <div class="header-actions">
         <el-radio-group v-model="statusFilter" @change="filterList" size="default">
           <el-radio-button :label="null">全部</el-radio-button>
-          <el-radio-button :label="0">💭 待添加</el-radio-button>
-          <el-radio-button :label="1">✅ 已添加</el-radio-button>
+          <el-radio-button :label="0">待添加</el-radio-button>
+          <el-radio-button :label="1">已添加</el-radio-button>
         </el-radio-group>
       </div>
     </div>
@@ -138,7 +138,9 @@ onMounted(fetchList)
   }
   
   :deep(.el-radio-button) {
-    --el-radio-button-checked-bg-color: linear-gradient(135deg, #FF6B9D, #FF8E53);
+    --el-radio-button-checked-bg-color: #FF6B9D;
+    --el-radio-button-checked-text-color: #FFFFFF;
+    --el-radio-button-checked-border-color: #FF6B9D;
   }
   
   :deep(.el-radio-button__inner) {
@@ -155,6 +157,13 @@ onMounted(fetchList)
   
   :deep(.el-radio-button:last-child .el-radio-button__inner) {
     border-radius: 20px !important;
+  }
+  
+  :deep(.el-radio-button__original-radio:checked + .el-radio-button__inner) {
+    background: linear-gradient(135deg, #FF6B9D, #FF8E53);
+    color: #FFFFFF !important;
+    border-color: transparent !important;
+    box-shadow: 0 2px 12px rgba(255, 107, 157, 0.4);
   }
 }
 

@@ -49,6 +49,8 @@ export function createRequest(options = {}) {
       if (error.response?.status === 401) {
         onUnauthorized()
         onError('登录已过期，请重新登录')
+      } else if (error.response?.status === 403) {
+        onError('权限不足，无法执行此操作')
       } else {
         onError(error.message || '网络错误')
       }

@@ -34,26 +34,6 @@
       </button>
     </form>
     
-    <!-- 快速登录 -->
-    <div class="quick-login">
-      <div class="divider">
-        <span>快速登录</span>
-      </div>
-      <div class="quick-accounts">
-        <div 
-          class="account-card" 
-          @click="quickLogin('girlfriend', 'love123')"
-        >
-          <div class="account-avatar">👩</div>
-          <div class="account-info">
-            <div class="account-name">小可爱</div>
-            <div class="account-desc">girlfriend / love123</div>
-          </div>
-          <div class="account-arrow">→</div>
-        </div>
-      </div>
-    </div>
-    
     <div class="footer-text">
       用爱发电 ❤️
     </div>
@@ -75,12 +55,6 @@ const form = reactive({
   username: '',
   password: ''
 })
-
-const quickLogin = (username, password) => {
-  form.username = username
-  form.password = password
-  handleLogin()
-}
 
 const handleLogin = async () => {
   if (!form.username || !form.password) {
@@ -145,105 +119,6 @@ const handleLogin = async () => {
   
   input {
     padding-left: 48px !important;
-  }
-}
-
-.quick-login {
-  margin-top: 32px;
-  width: 100%;
-  max-width: 320px;
-  
-  .divider {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    
-    &::before, &::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.3), transparent);
-    }
-    
-    span {
-      padding: 0 16px;
-      font-size: 12px;
-      color: #B2BEC3;
-    }
-  }
-  
-  .quick-accounts {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    
-    .account-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: white;
-      border: 2px solid #F0F0F0;
-      box-shadow: 0 2px 8px rgba(255, 107, 157, 0.08);
-      
-      &:hover {
-        border-color: #FF6B9D;
-        transform: translateX(4px);
-        box-shadow: 0 4px 16px rgba(255, 107, 157, 0.15);
-        
-        .account-arrow {
-          transform: translateX(4px);
-          color: #FF6B9D;
-        }
-      }
-      
-      &:active {
-        transform: scale(0.98);
-      }
-      
-      .account-avatar {
-        font-size: 28px;
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #FFE8EE, #FFF5F7);
-        border-radius: 12px;
-      }
-      
-      .account-info {
-        flex: 1;
-        
-        .account-name {
-          font-size: 15px;
-          font-weight: 600;
-          color: #2D3436;
-          margin-bottom: 2px;
-        }
-        
-        .account-desc {
-          font-size: 12px;
-          color: #B2BEC3;
-          font-family: 'SF Mono', Monaco, monospace;
-        }
-      }
-      
-      .account-arrow {
-        font-size: 18px;
-        color: #B2BEC3;
-        transition: all 0.3s ease;
-      }
-      
-      &.admin {
-        .account-avatar {
-          background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
-        }
-      }
-    }
   }
 }
 

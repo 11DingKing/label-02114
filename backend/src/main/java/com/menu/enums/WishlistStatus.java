@@ -26,4 +26,14 @@ public enum WishlistStatus {
         }
         throw new IllegalArgumentException("无效的心愿单状态码: " + code);
     }
+
+    public static boolean isValid(Integer code) {
+        if (code == null) return false;
+        for (WishlistStatus status : values()) {
+            if (status.code == code) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

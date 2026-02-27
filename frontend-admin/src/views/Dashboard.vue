@@ -3,7 +3,7 @@
     <el-row :gutter="24">
       <el-col :span="8">
         <div class="stat-card" style="--color: #FF6B9D">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #FF6B9D, #E91E63)">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #E91E63, #C2185B)">
             <el-icon><List /></el-icon>
           </div>
           <div class="stat-info">
@@ -16,7 +16,7 @@
       </el-col>
       <el-col :span="8">
         <div class="stat-card" style="--color: #67C23A">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #67C23A, #529b2e)">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #388E3C, #2E7D32)">
             <el-icon><Check /></el-icon>
           </div>
           <div class="stat-info">
@@ -29,7 +29,7 @@
       </el-col>
       <el-col :span="8">
         <div class="stat-card" style="--color: #FFAB40">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #FFAB40, #FF9800)">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #F57C00, #E65100)">
             <el-icon><TrendCharts /></el-icon>
           </div>
           <div class="stat-info">
@@ -62,7 +62,7 @@
             <span class="dish-name">{{ row.dishName }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="orderCount" label="点餐次数" width="150">
+        <el-table-column prop="orderCount" label="点餐次数" min-width="180">
           <template #default="{ row }">
             <div class="count-bar">
               <div class="count-fill" :style="{ width: getBarWidth(row.orderCount) }"></div>
@@ -180,8 +180,8 @@ onMounted(async () => {
   height: 28px;
   background: linear-gradient(90deg, #F8F9FA, #F0F0F0);
   border-radius: 14px;
-  overflow: hidden;
-  min-width: 120px;
+  overflow: visible;
+  min-width: 100px;
   
   .count-fill {
     position: absolute;
@@ -206,9 +206,9 @@ onMounted(async () => {
     justify-content: center;
     font-size: 13px;
     font-weight: 600;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    color: #2D3436;
     z-index: 1;
+    white-space: nowrap;
   }
 }
 

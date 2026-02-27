@@ -2,6 +2,7 @@ package com.menu.controller;
 
 import com.menu.common.PageResult;
 import com.menu.common.Result;
+import com.menu.config.AdminRequired;
 import com.menu.dto.DishDTO;
 import com.menu.entity.Dish;
 import com.menu.service.DishService;
@@ -51,6 +52,7 @@ public class DishController {
         return Result.success(dishService.getById(id));
     }
     
+    @AdminRequired
     @Operation(summary = "保存菜品", description = "新增或更新菜品信息")
     @PostMapping("/save")
     public Result<Void> save(@Valid @RequestBody DishDTO dto) {
@@ -58,6 +60,7 @@ public class DishController {
         return Result.success();
     }
     
+    @AdminRequired
     @Operation(summary = "删除菜品")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@Parameter(description = "菜品ID") @PathVariable Long id) {

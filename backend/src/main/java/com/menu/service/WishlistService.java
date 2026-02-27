@@ -50,10 +50,15 @@ public class WishlistService {
         log.info("添加心愿成功: userId={}, dishName={}", userId, dto.getDishName());
     }
     
-    public void delete(Long id) {
+    public void delete(Long id, Long currentUserId, Integer role) {
         Wishlist wishlist = wishlistMapper.selectById(id);
         if (wishlist == null) {
             throw new BusinessException("心愿不存在");
+        }
+        
+        // 非管理员只能删除自己的心愿
+        if (role != 1 && !wishlist.getUserId().equals(currentUserId)) {
+            throw new BusinessException("无权删除他人的心愿");
         }
         
         wishlistMapper.deleteById(id);
@@ -61,6 +66,11 @@ public class WishlistService {
     }
     
     public void updateStatus(Long id, Integer status) {
+        // 校验状态枚举值
+        if (!WishlistStatus.isValid(status)) {
+            throw new BusinessException("无效的心愿状态参数，仅允许 0(待添加) 或 1(已添加)");
+        }
+        
         Wishlist wishlist = wishlistMapper.selectById(id);
         if (wishlist == null) {
             throw new BusinessException("心愿不存在");

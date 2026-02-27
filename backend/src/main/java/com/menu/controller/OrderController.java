@@ -2,6 +2,7 @@ package com.menu.controller;
 
 import com.menu.common.PageResult;
 import com.menu.common.Result;
+import com.menu.config.AdminRequired;
 import com.menu.dto.OrderDTO;
 import com.menu.entity.OrderRecord;
 import com.menu.service.OrderService;
@@ -23,6 +24,7 @@ public class OrderController {
     
     private final OrderService orderService;
     
+    @AdminRequired
     @Operation(summary = "分页查询订单列表", description = "管理员可查看所有订单")
     @GetMapping("/list")
     public Result<PageResult<OrderRecord>> list(
@@ -59,6 +61,7 @@ public class OrderController {
         return Result.success();
     }
     
+    @AdminRequired
     @Operation(summary = "更新订单状态")
     @PutMapping("/status/{id}")
     public Result<Void> updateStatus(

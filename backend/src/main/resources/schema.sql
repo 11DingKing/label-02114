@@ -105,10 +105,10 @@ CREATE TABLE `operation_log` (
 -- 初始化数据 - 真实中文数据
 -- ============================================
 
--- 用户账号
+-- 用户账号 (密码使用 BCrypt 加密)
 INSERT INTO `user` (`username`, `password`, `nickname`, `avatar`, `role`) VALUES
-('admin', 'admin123', '男朋友', NULL, 1),
-('girlfriend', 'love123', '小可爱', NULL, 0);
+('admin', '$2b$10$lOpskV0Rimr.bZZKn4xnPudEZ.7acvgC4D02.pCp35KCDOXAT9uoS', '男朋友', NULL, 1),
+('girlfriend', '$2b$10$hndBe506mV/m5n4ImuX4jeewEnAs2e.oG22ErTi6Fcar7gV9s1imC', '小可爱', NULL, 0);
 
 -- 分类数据
 INSERT INTO `category` (`name`, `icon`, `sort_order`) VALUES

@@ -1,6 +1,7 @@
 package com.menu.controller;
 
 import com.menu.common.Result;
+import com.menu.config.AdminRequired;
 import com.menu.dto.WishlistDTO;
 import com.menu.entity.Wishlist;
 import com.menu.service.WishlistService;
@@ -39,11 +40,15 @@ public class WishlistController {
     
     @Operation(summary = "删除心愿")
     @DeleteMapping("/{id}")
-    public Result<Void> delete(@Parameter(description = "心愿ID") @PathVariable Long id) {
-        wishlistService.delete(id);
+    public Result<Void> delete(@Parameter(description = "心愿ID") @PathVariable Long id,
+                               HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("userId");
+        Integer role = (Integer) request.getAttribute("role");
+        wishlistService.delete(id, userId, role);
         return Result.success();
     }
     
+    @AdminRequired
     @Operation(summary = "更新心愿状态")
     @PutMapping("/status/{id}")
     public Result<Void> updateStatus(

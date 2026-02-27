@@ -14,6 +14,7 @@ import com.menu.vo.StatsVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class OrderService {
         return orderRecordMapper.selectTodayOrders(userId, today);
     }
     
+    @Transactional(rollbackFor = Exception.class)
     public void save(OrderDTO dto, Long userId) {
         // 校验餐次类型
         if (!MealType.isValid(dto.getMealType())) {

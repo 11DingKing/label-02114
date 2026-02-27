@@ -84,11 +84,9 @@ public class DishService {
     }
     
     public void incrementOrderCount(Long id) {
-        Dish dish = dishMapper.selectById(id);
-        if (dish != null) {
-            dish.setOrderCount(dish.getOrderCount() + 1);
-            dishMapper.updateById(dish);
-            log.debug("菜品点餐次数+1: id={}, name={}, count={}", id, dish.getName(), dish.getOrderCount());
+        int rows = dishMapper.incrementOrderCount(id);
+        if (rows > 0) {
+            log.debug("菜品点餐次数+1: id={}", id);
         }
     }
 }

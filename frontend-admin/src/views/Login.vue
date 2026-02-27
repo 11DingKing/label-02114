@@ -43,25 +43,6 @@
         </el-form-item>
       </el-form>
       
-      <!-- 快速登录 -->
-      <div class="quick-login">
-        <div class="divider">
-          <span>快速登录</span>
-        </div>
-        <div class="quick-accounts">
-          <div 
-            class="account-card admin" 
-            @click="quickLogin('admin', 'admin123')"
-          >
-            <div class="account-avatar">👨‍💻</div>
-            <div class="account-info">
-              <div class="account-name">管理员</div>
-              <div class="account-desc">admin / admin123</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
       <div class="footer-text">
         用爱发电 ❤️ Made with Love
       </div>
@@ -94,12 +75,6 @@ const rules = {
 
 const focusPassword = () => {
   passwordRef.value?.focus()
-}
-
-const quickLogin = (username, password) => {
-  form.username = username
-  form.password = password
-  handleLogin()
 }
 
 const handleLogin = async () => {
@@ -167,83 +142,6 @@ const handleLogin = async () => {
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-30px) rotate(5deg); }
-}
-
-.quick-login {
-  margin-top: 24px;
-  
-  .divider {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    
-    &::before, &::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #E8E8E8, transparent);
-    }
-    
-    span {
-      padding: 0 16px;
-      font-size: 12px;
-      color: #909399;
-    }
-  }
-  
-  .quick-accounts {
-    display: flex;
-    gap: 12px;
-    
-    .account-card {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 2px solid #F0F0F0;
-      background: #FAFAFA;
-      
-      &:hover {
-        border-color: #FF6B9D;
-        background: #FFF5F7;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(255, 107, 157, 0.15);
-      }
-      
-      &:active {
-        transform: scale(0.98);
-      }
-      
-      .account-avatar {
-        font-size: 32px;
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #FFE8EE, #FFF5F7);
-        border-radius: 12px;
-      }
-      
-      .account-info {
-        .account-name {
-          font-size: 14px;
-          font-weight: 600;
-          color: #2D3436;
-          margin-bottom: 2px;
-        }
-        
-        .account-desc {
-          font-size: 12px;
-          color: #909399;
-        }
-      }
-    }
-  }
 }
 
 .footer-text {
