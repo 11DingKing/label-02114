@@ -616,11 +616,31 @@ body {
   font-weight: 500;
   transition: all $duration $ease;
   
+  &.is-link {
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      border: none;
+    }
+    &.el-button--primary:hover {
+      color: var(--el-color-primary);
+    }
+    &.el-button--danger:hover {
+      color: var(--el-color-danger);
+    }
+    &.el-button--success:hover {
+      color: var(--el-color-success);
+    }
+    &.el-button--warning:hover {
+      color: var(--el-color-warning);
+    }
+  }
+  
   &--primary {
     background: $gradient-primary;
     border: none;
     
-    &:hover {
+    &:hover:not(.is-link) {
       transform: translateY(-1px);
       box-shadow: $shadow-pink;
     }

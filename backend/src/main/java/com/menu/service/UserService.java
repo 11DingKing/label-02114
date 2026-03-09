@@ -61,22 +61,12 @@ public class UserService {
     }
     
     /**
-     * 验证密码 - 使用 BCrypt
-     * 兼容旧明文密码：如果存储的密码不是 BCrypt 格式，则先比对明文，
-     * 比对成功后自动升级为 BCrypt 哈希。
+     * 验证密码 - 仅支持 BCrypt 格式
      */
     private boolean verifyPassword(String rawPassword, String storedPassword) {
         if (rawPassword == null || storedPassword == null) {
             return false;
         }
-        // BCrypt 哈希以 $2a$、$2b$ 或 $2y$ 开头
-        if (storedPassword.startsWith("$2")) {
-            return passwordEncoder.matches(rawPassword, storedPassword);
-        }
-        // 兼容旧明文密码：比对成功后自动升级
-        if (rawPassword.equals(storedPassword)) {
-            return true;
-        }
-        return false;
+        return passwordEncoder.matches(rawPassword, storedPassword);
     }
 }
