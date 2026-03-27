@@ -101,6 +101,26 @@ CREATE TABLE `operation_log` (
     KEY `idx_created_at` (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='操作日志表';
 
+-- 每日情话表
+DROP TABLE IF EXISTS `daily_message`;
+CREATE TABLE `daily_message` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '情话ID',
+    `content` VARCHAR(500) NOT NULL COMMENT '情话内容',
+    `author` VARCHAR(100) DEFAULT NULL COMMENT '作者/来源',
+    `show_date` DATE NOT NULL COMMENT '展示日期',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_show_date` (`show_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='每日情话表';
+
+-- 初始化每日情话数据
+INSERT INTO `daily_message` (`content`, `author`, `show_date`) VALUES
+('遇到你之前，我没想过结婚；遇到你之后，我结婚没想过和别人。', '钱钟书', '2026-03-28'),
+('你是一树一树的花开，是燕在梁间呢喃，你是爱，是暖，是希望，你是人间的四月天！', '林徽因', '2026-03-29'),
+('于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里，没有早一步，也没有晚一步，刚巧赶上了。', '张爱玲', '2026-03-30'),
+('答案很长，我准备用一生的时间来回答，你准备要听了吗？', '林徽因', '2026-03-31'),
+('如果可以，我想和你一起走过着落英缤纷的路。牵着手，路过繁华，走向平淡，这就是我要的幸福。', '网络', '2026-04-01');
+
 -- ============================================
 -- 初始化数据 - 真实中文数据
 -- ============================================

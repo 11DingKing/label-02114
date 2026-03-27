@@ -41,6 +41,12 @@ const routes = [
         name: 'Wishlist',
         component: () => import('../views/Wishlist.vue'),
         meta: { title: '心愿清单' }
+      },
+      {
+        path: 'daily-message',
+        name: 'DailyMessage',
+        component: () => import('../views/DailyMessage.vue'),
+        meta: { title: '每日情话' }
       }
     ]
   }
