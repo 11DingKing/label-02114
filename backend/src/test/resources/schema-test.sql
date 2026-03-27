@@ -1,4 +1,5 @@
 -- H2 测试数据库初始化脚本
+DROP TABLE IF EXISTS daily_message;
 DROP TABLE IF EXISTS operation_log;
 DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS order_record;
@@ -73,6 +74,14 @@ CREATE TABLE operation_log (
     params TEXT,
     ip VARCHAR(50),
     cost_time BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE daily_message (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    author VARCHAR(100),
+    show_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
