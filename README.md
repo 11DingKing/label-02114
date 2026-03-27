@@ -9,21 +9,17 @@
 ### 🐳 方式一：Docker Compose 一键启动（推荐）
 
 ```bash
-# 1. 克隆项目
-git clone <repository-url>
-cd girlfriend-menu
-
-# 2. 配置环境变量（可选，使用默认值可跳过）
+# 1. 配置环境变量（可选，使用默认值可跳过）
 cp .env.example .env
 # 编辑 .env 文件修改数据库密码等敏感信息
 
-# 3. 一键启动所有服务
+# 2. 一键启动所有服务
 docker-compose up --build -d
 
-# 4. 查看服务状态
+# 3. 查看服务状态
 docker-compose ps
 
-# 5. 查看日志（可选）
+# 4. 查看日志（可选）
 docker-compose logs -f backend
 ```
 
