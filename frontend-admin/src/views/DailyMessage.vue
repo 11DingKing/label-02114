@@ -70,7 +70,7 @@
 <script>
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getDailyMessageList, getDailyMessageById, saveDailyMessage, deleteDailyMessage } from '@/api'
+import { getDailyMessageList, getDailyMessageById, saveDailyMessage, deleteDailyMessage } from '../api'
 
 export default {
   name: 'DailyMessage',

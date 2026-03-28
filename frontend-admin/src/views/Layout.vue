@@ -26,6 +26,10 @@
           <el-icon><Star /></el-icon>
           <span>心愿清单</span>
         </el-menu-item>
+        <el-menu-item index="/daily-message">
+          <el-icon><ChatDotRound /></el-icon>
+          <span>每日情话</span>
+        </el-menu-item>
       </el-menu>
       <div class="sidebar-footer">
         <div class="version">v1.0.0</div>
@@ -71,7 +75,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user'
-import { SwitchButton } from '@element-plus/icons-vue'
+import { SwitchButton, ChatDotRound } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -102,7 +106,8 @@ const getBreadcrumb = () => {
     '/category': '分类列表',
     '/dish': '菜品列表',
     '/order': '订单列表',
-    '/wishlist': '心愿列表'
+    '/wishlist': '心愿列表',
+    '/daily-message': '情话列表'
   }
   return titles[route.path] || '首页'
 }
