@@ -26,6 +26,10 @@
           <el-icon><Star /></el-icon>
           <span>心愿清单</span>
         </el-menu-item>
+        <el-menu-item index="/daily-message">
+          <el-icon><Star /></el-icon>
+          <span>每日情话</span>
+        </el-menu-item>
       </el-menu>
       <div class="sidebar-footer">
         <div class="version">v1.0.0</div>
@@ -43,7 +47,9 @@
             <div class="user-info">
               <div class="avatar">{{ getAvatar() }}</div>
               <div class="user-detail">
-                <span class="username">{{ userStore.userInfo.nickname || userStore.userInfo.username }}</span>
+                <span class="username">{{
+                  userStore.userInfo.nickname || userStore.userInfo.username
+                }}</span>
                 <span class="role">管理员</span>
               </div>
               <el-icon class="arrow"><ArrowDown /></el-icon>
@@ -68,60 +74,61 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useUserStore } from '../stores/user'
-import { SwitchButton } from '@element-plus/icons-vue'
+import { ref, onMounted, onUnmounted, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useUserStore } from "../stores/user";
+import { SwitchButton, Cherry } from "@element-plus/icons-vue";
 
-const route = useRoute()
-const router = useRouter()
-const userStore = useUserStore()
-const currentTime = ref('')
+const route = useRoute();
+const router = useRouter();
+const userStore = useUserStore();
+const currentTime = ref("");
 
-let timer = null
+let timer = null;
 
 const updateTime = () => {
-  const now = new Date()
-  const options = { 
-    month: 'short', 
-    day: 'numeric',
-    hour: '2-digit', 
-    minute: '2-digit'
-  }
-  currentTime.value = now.toLocaleString('zh-CN', options)
-}
+  const now = new Date();
+  const options = {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  currentTime.value = now.toLocaleString("zh-CN", options);
+};
 
 const getAvatar = () => {
-  const name = userStore.userInfo.nickname || userStore.userInfo.username || 'A'
-  return name.charAt(0).toUpperCase()
-}
+  const name =
+    userStore.userInfo.nickname || userStore.userInfo.username || "A";
+  return name.charAt(0).toUpperCase();
+};
 
 const getBreadcrumb = () => {
   const titles = {
-    '/dashboard': '数据统计',
-    '/category': '分类列表',
-    '/dish': '菜品列表',
-    '/order': '订单列表',
-    '/wishlist': '心愿列表'
-  }
-  return titles[route.path] || '首页'
-}
+    "/dashboard": "数据统计",
+    "/category": "分类列表",
+    "/dish": "菜品列表",
+    "/order": "订单列表",
+    "/wishlist": "心愿列表",
+  };
+  return titles[route.path] || "首页";
+};
 
 const handleCommand = (command) => {
-  if (command === 'logout') {
-    userStore.logout()
-    router.push('/login')
+  if (command === "logout") {
+    userStore.logout();
+    router.push("/login");
   }
-}
+};
 
 onMounted(() => {
-  updateTime()
-  timer = setInterval(updateTime, 60000)
-})
+  updateTime();
+  timer = setInterval(updateTime, 60000);
+});
 
 onUnmounted(() => {
-  if (timer) clearInterval(timer)
-})
+  if (timer) clearInterval(timer);
+});
 </script>
 
 <style scoped lang="scss">
@@ -131,26 +138,26 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    
+
     .logo-icon {
       font-size: 28px;
       animation: heartbeat 2s ease-in-out infinite;
     }
-    
+
     .logo-text {
       font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.5px;
     }
   }
-  
+
   .sidebar-footer {
     position: absolute;
     bottom: 20px;
     left: 0;
     right: 0;
     text-align: center;
-    
+
     .version {
       font-size: 12px;
       color: rgba(255, 255, 255, 0.5);
@@ -163,27 +170,27 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     gap: 8px;
-    
+
     .breadcrumb {
       font-size: 14px;
-      color: #B2BEC3;
+      color: #b2bec3;
     }
   }
-  
+
   .header-right {
     display: flex;
     align-items: center;
     gap: 24px;
-    
+
     .time-display {
       font-size: 14px;
-      color: #636E72;
+      color: #636e72;
       padding: 6px 14px;
-      background: #F8F9FC;
+      background: #f8f9fc;
       border-radius: 8px;
     }
   }
-  
+
   .user-info {
     display: flex;
     align-items: center;
@@ -192,15 +199,15 @@ onUnmounted(() => {
     padding: 8px 12px;
     border-radius: 12px;
     transition: all 0.3s ease;
-    
+
     &:hover {
-      background: #FFF5F7;
+      background: #fff5f7;
     }
-    
+
     .avatar {
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, #FF6B9D 0%, #E91E63 100%);
+      background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -210,28 +217,28 @@ onUnmounted(() => {
       font-size: 16px;
       box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
     }
-    
+
     .user-detail {
       display: flex;
       flex-direction: column;
-      
+
       .username {
         font-size: 14px;
         font-weight: 600;
-        color: #2D3436;
+        color: #2d3436;
       }
-      
+
       .role {
         font-size: 12px;
-        color: #B2BEC3;
+        color: #b2bec3;
       }
     }
-    
+
     .arrow {
-      color: #B2BEC3;
+      color: #b2bec3;
       transition: transform 0.3s;
     }
-    
+
     &:hover .arrow {
       transform: rotate(180deg);
     }
@@ -255,10 +262,21 @@ onUnmounted(() => {
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  10% { transform: scale(1.1); }
-  20% { transform: scale(1); }
-  30% { transform: scale(1.1); }
-  40% { transform: scale(1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(1);
+  }
 }
 </style>

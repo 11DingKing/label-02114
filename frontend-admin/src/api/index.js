@@ -25,3 +25,10 @@ export const getOrderStats = () => request.get('/order/stats')
 export const getWishlist = () => request.get('/wishlist/list')
 export const deleteWishlist = id => request.delete(`/wishlist/${id}`)
 export const updateWishlistStatus = (id, status) => request.put(`/wishlist/status/${id}`, null, { params: { status } })
+
+// 每日情话
+export const getDailyMessageList = () => request.get('/daily-message/list')
+export const getDailyMessageById = id => request.get(`/daily-message/${id}`)
+export const saveDailyMessage = data => request.post('/daily-message/save', data)
+export const deleteDailyMessage = id => request.delete(`/daily-message/${id}`)
+export const getTodayMessage = () => request.get('/daily-message/today')
