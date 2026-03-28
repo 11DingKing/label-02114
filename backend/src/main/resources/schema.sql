@@ -101,6 +101,18 @@ CREATE TABLE `operation_log` (
     KEY `idx_created_at` (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='操作日志表';
 
+-- 每日情话表
+DROP TABLE IF EXISTS `daily_message`;
+CREATE TABLE `daily_message` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `content` TEXT NOT NULL COMMENT '情话内容',
+    `author` VARCHAR(100) DEFAULT NULL COMMENT '作者/来源',
+    `show_date` DATE NOT NULL COMMENT '展示日期',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_show_date` (`show_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='每日情话表';
+
 -- ============================================
 -- 初始化数据 - 真实中文数据
 -- ============================================
@@ -218,3 +230,12 @@ INSERT INTO `wishlist` (`user_id`, `dish_name`, `description`, `status`) VALUES
 (2, '芝士焗饭', '好久没吃芝士焗饭了，想念那个拉丝的感觉', 0),
 (2, '麻辣香锅', '想吃麻辣香锅，多放藕片和土豆', 1),
 (2, '烤鱼', '想吃万州烤鱼，要麻辣味的', 0);
+
+-- 每日情话示例数据
+INSERT INTO `daily_message` (`content`, `author`, `show_date`) VALUES
+('遇见你，是我一生的幸运，喜欢你，是我做过最好的事情。', '网络', DATE_SUB(CURDATE(), INTERVAL 3 DAY)),
+('我不想做你的人生插曲，只想做你人生最完美的结局。', '网络', DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
+('世界那么大，能遇见你，真好。', '网络', DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
+('你是我明目张胆的偏袒，也是我众所周知的私心。', '网络', CURDATE()),
+('愿我们相爱，从青丝到白头，从年少到古稀。', '网络', DATE_ADD(CURDATE(), INTERVAL 1 DAY)),
+('我想用余生为你暖一盏茶，晚风微扬时勿忘回家。', '网络', DATE_ADD(CURDATE(), INTERVAL 2 DAY));
